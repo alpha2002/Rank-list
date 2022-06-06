@@ -1,0 +1,34 @@
+class students:
+    def __init__(self, course, reg, roll, first, status, cgpa, sgp):
+        self.course = course
+        self.reg = reg
+        self.roll = roll
+        self.first = first
+        self.sgp = sgp
+        self.cgpa = cgpa
+        self.status = status
+
+f = open("dekhi.txt", "r")
+list = []
+for i in range(0,175):
+    s = f.readline()
+    x = s.split(" ")
+    p= len(x)
+    name=""
+    for j in range(4,p-2):
+        if x[j].isalpha():
+            name= name+x[j]+" "
+    list.append(students(x[1],x[2], x[3],name,x[-1],x[-2],x[-3]))
+f.close()
+
+n = len(list)
+for i in range(n - 1):
+    for j in range(0, n - i - 1):
+        if list[j].cgpa< list[j + 1].cgpa:
+             list[j], list[j + 1] = list[j + 1], list[j]
+
+
+
+for i in range(0,175):
+    obj=list[i]
+    print( i+1,obj.course,obj.reg,obj.roll,obj.first,obj.sgp, obj.cgpa, obj.status, sep='  ')
